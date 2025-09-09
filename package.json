@@ -1,0 +1,16 @@
+{
+  "name": "todo-mongo",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "index.mjs",
+  "scripts": {
+    "start": "node index.mjs"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.0",
+    "mongodb": "^5.11.0"
+  }
+}
