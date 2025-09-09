@@ -1,20 +1,20 @@
-# Use official Node 22 slim
+# Use official Node 22 slim image
 FROM node:22-slim
 
-# create app directory
+# Create app directory
 WORKDIR /usr/src/app
 
-# Install small system deps (if needed) and clean apt caches
-RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates && rm -rf /var/lib/apt/lists/*
+# Copy package manifest
+COPY package.json ./
 
-# copy package manifest and install dependencies first (cache)
-COPY package.json package-lock.json* ./
+# Install dependencies (omit dev dependencies)
 RUN npm install --omit=dev
 
-# copy source
+# Copy application source
 COPY . .
 
-ENV PORT=3000
+# Expose port
 EXPOSE 3000
 
+# Run the app
 CMD ["node", "index.mjs"]

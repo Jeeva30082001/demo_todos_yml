@@ -11,6 +11,6 @@
   },
   "dependencies": {
     "dotenv": "^16.0.0",
-    "mongodb": "^5.11.0"
+    "mongodb": "^6.8.0"
   }
 }
