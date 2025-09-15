@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         DOCKER_IMAGE = 'jeeva3008/todo_db:latest'
-        GIT_REPO = 'https://github.com/Jeeva30082001/demo_mangodb_docker.git'
+        GIT_REPO = 'https://github.com/Jeeva30082001/demo_todos_yml.git'
         GIT_BRANCH = 'main'
         DOCKER_CREDENTIALS_ID = 'dockerhub-credentials'
     }
@@ -20,7 +20,7 @@ pipeline {
             steps {
                 script {
                     echo 'Building Docker image...'
-                    sh "sudo docker build -t ${DOCKER_IMAGE} ."
+                    sh " docker build -t ${DOCKER_IMAGE} ."
                 }
             }
         }
@@ -39,7 +39,7 @@ pipeline {
         stage('Push Docker Image') {
             steps {
                 echo 'Pushing Docker image to Docker Hub...'
-                sh "sudo docker push ${DOCKER_IMAGE}"
+                sh " docker push ${DOCKER_IMAGE}"
             }
         }
 
@@ -47,25 +47,25 @@ pipeline {
             steps {
                 echo 'Deploying container from Docker Hub image...'
                 sh """
-                sudo docker pull ${DOCKER_IMAGE}
-                sudo docker stop mycontainer || true
-                sudo docker rm mycontainer || true
-                sudo docker run -d --name mycontainer -p 8080:8080 ${DOCKER_IMAGE}
+                 docker pull ${DOCKER_IMAGE}
+                 docker stop mycontainer || true
+                 docker rm mycontainer || true
+                 docker run -d --name mycontainer -p 8081:8080 ${DOCKER_IMAGE}
                 """
             }
         }
     }
 
-    // post {
-    //     always {
-    //         echo 'Cleaning up...'
-    //         sh "docker logout"
-    //     }
-    //     success {
-    //         echo 'Deployment completed successfully!'
-    //     }
-    //     failure {
-    //         echo 'Deployment failed.'
-    //     }
-    // }
+    post {
+        always {
+            echo 'Cleaning up...'
+            sh "docker logout"
+        }
+        success {
+            echo 'Deployment completed successfully!'
+        }
+        failure {
+            echo 'Deployment failed.'
+        }
+    }
 }
