@@ -2,8 +2,8 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE = 'jeeva3008/todo_db:latest'
-        GIT_REPO = 'https://github.com/Jeeva30082001/demo_todos_yml.git'
+        DOCKER_IMAGE = 'jeeva3008/backend:latest'
+        GIT_REPO = 'https://github.com/Jeeva30082001/Node.js_docker_yml_jenkins_mangoDB.git'
         GIT_BRANCH = 'main'
         DOCKER_CREDENTIALS_ID = 'dockerhub-credentials'
     }
